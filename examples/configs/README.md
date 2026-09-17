@@ -89,6 +89,16 @@ servers. Its
 covers the v0.5.18 SGLang capture patch and the bundled `deepseek-v4` chat
 template (the checkpoint ships no Jinja template).
 
+`deepseek-v4.1-flash-dspark-disaggregated.yaml` is the same recipe for
+DeepSeek-V4.1-Flash: `configs/deepseek-v4.1-flash-dspark.json` is the V4
+drafter shape at the V4.1 width (hidden 5120, 40 heads, 8 KV heads, five
+layers reading the library-default capture layers `[1, 10, 19, 28, 37]` of
+the 40-layer target; the bundled official drafter reads `[37, 38, 39]` with
+block size 5, a natural A/B), `mask_token_id` is the checkpoint's
+`dspark_noise_token_id`, and prompts render through the `deepseek-v4.1`
+template. V4.1 only serves on SGLang main, so the capture servers use
+`--target main-923e4a56`.
+
 `qwen3.8-27b-dflash2-disaggregated.yaml` (external services, two nodes) and
 its managed-local sibling `qwen3.8-27b-dflash2-4server-dp4-disaggregated.yaml`
 (one node, four capture servers plus a DP4 trainer) train the DFlash2 drafter
